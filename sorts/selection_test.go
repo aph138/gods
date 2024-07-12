@@ -7,11 +7,11 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestBubble(t *testing.T) {
+func TestSelection(t *testing.T) {
 	assert := assert.New(t)
 	for _, c := range tests {
 		result := slices.Clone(c.input)
-		BubbleSort(result)
+		SelectionSort(result)
 		assert.Equal(c.expected, result)
 	}
 }
