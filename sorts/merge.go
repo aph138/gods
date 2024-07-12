@@ -1,27 +1,40 @@
 package sorts
 
-func MergeSort(array []int) []int {
+import "slices"
+
+// time complexity: O(n*log(n))
+// space complexity: O(n)
+func MergeSort(array []int) {
 	l := len(array)
 	if l < 2 {
-		return array
+		return
 	}
 
-	leftArray := MergeSort(array[:l/2])
-	rightArray := MergeSort(array[l/2:])
+	leftArray := slices.Clone(array[:l/2])
+	rightArray := slices.Clone(array[l/2:])
 
-	result := make([]int, 0, len(array))
-	l, r := 0, 0
+	MergeSort(leftArray)
+	MergeSort(rightArray)
+
+	l, r, j := 0, 0, 0
 	for l < len(leftArray) && r < len(rightArray) {
 		if leftArray[l] < rightArray[r] {
-			result = append(result, leftArray[l])
+			array[j] = leftArray[l]
 			l++
 		} else {
-			result = append(result, rightArray[r])
+			array[j] = rightArray[r]
 			r++
 		}
+		j++
 	}
-	result = append(result, leftArray[l:]...)
-	result = append(result, rightArray[r:]...)
-
-	return result
+	for r < len(leftArray) {
+		array[j] = rightArray[r]
+		r++
+		j++
+	}
+	for l < len(leftArray) {
+		array[j] = leftArray[l]
+		l++
+		j++
+	}
 }
