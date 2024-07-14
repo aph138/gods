@@ -1,4 +1,5 @@
 // Implementation of the Queue data structure.
+// Queue is a linear data structure that follows FIFO (First-In-First-Out) principle.
 package queue
 
 import "errors"
